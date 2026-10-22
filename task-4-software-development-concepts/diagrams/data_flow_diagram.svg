@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F2942" />
+    </linearGradient>
+
+    <linearGradient id="tealCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#3B0764" />
+    </linearGradient>
+
+    <linearGradient id="orangeCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#451A03" />
+    </linearGradient>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38BDF8" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#C084FC" />
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#34D399" />
+    </marker>
+  </defs>
+
+  <style>
+    .title { font-family: 'Segoe UI', Inter, sans-serif; font-size: 24px; font-weight: 700; fill: #F8FAFC; }
+    .subtitle { font-family: 'Segoe UI', Inter, sans-serif; font-size: 13px; font-weight: 400; fill: #94A3B8; }
+    .step-tag { font-family: 'Segoe UI', Inter, sans-serif; font-size: 11px; font-weight: 700; fill: #38BDF8; letter-spacing: 1px; }
+    .card-title { font-family: 'Segoe UI', Inter, sans-serif; font-size: 16px; font-weight: 600; fill: #FFFFFF; }
+    .card-body { font-family: 'Segoe UI', Inter, sans-serif; font-size: 12px; fill: #CBD5E1; line-height: 1.5; }
+    .card-code { font-family: 'Consolas', monospace; font-size: 11px; fill: #38BDF8; }
+    .pill { rx: 6px; ry: 6px; }
+    .connector-text { font-family: 'Segoe UI', Inter, sans-serif; font-size: 11px; font-weight: 500; fill: #38BDF8; text-anchor: middle; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1200" height="750" fill="url(#bgGrad)" />
+
+  <!-- Top Title Banner -->
+  <text x="60" y="55" class="title">Bluestock FinTech Data Flow Architecture</text>
+  <text x="60" y="80" class="subtitle">End-to-End Pipeline: User Action → Web App → API Gateway → Backend → OLTP DB → Kafka CDC → Data Warehouse → Analytics Dashboard</text>
+
+  <!-- ================= ROW 1: USER TO OPERATIONAL DATABASE ================= -->
+
+  <!-- STEP 1: Client / Web App -->
+  <g transform="translate(60, 120)">
+    <rect width="230" height="230" rx="12" fill="url(#blueCard)" stroke="#0284C7" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#0369A1" />
+    <text x="22" y="29" class="step-tag">STAGE 1</text>
+    <text x="15" y="65" class="card-title">Frontend App</text>
+    <text x="15" y="88" class="card-body">👤 Retail Investor / Trader</text>
+    <text x="15" y="110" class="card-body">• React / Next.js Web App</text>
+    <text x="15" y="130" class="card-body">• Action: Clicks "Buy 10 TCS"</text>
+    <text x="15" y="150" class="card-body">• Validates input lot size</text>
+    <text x="15" y="170" class="card-body">• Attaches Bearer JWT</text>
+    <text x="15" y="200" class="card-code">POST /api/v1/orders</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M 290 235 L 340 235" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="315" y="225" class="connector-text">HTTPS</text>
+
+  <!-- STEP 2: Edge & API Gateway -->
+  <g transform="translate(350, 120)">
+    <rect width="230" height="230" rx="12" fill="url(#blueCard)" stroke="#0284C7" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#0369A1" />
+    <text x="22" y="29" class="step-tag">STAGE 2</text>
+    <text x="15" y="65" class="card-title">API Gateway</text>
+    <text x="15" y="88" class="card-body">🛡️ Cloudflare / Kong / NGINX</text>
+    <text x="15" y="110" class="card-body">• TLS / SSL Termination</text>
+    <text x="15" y="130" class="card-body">• Rate Limiting (10 req/s)</text>
+    <text x="15" y="150" class="card-body">• Verifies JWT Token Signature</text>
+    <text x="15" y="170" class="card-body">• IP Whitelisting & WAF</text>
+    <text x="15" y="200" class="card-code">HTTP 200 / 401 Auth</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <path d="M 580 235 L 630 235" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="605" y="225" class="connector-text">gRPC/REST</text>
+
+  <!-- STEP 3: Backend Microservice -->
+  <g transform="translate(640, 120)">
+    <rect width="230" height="230" rx="12" fill="url(#orangeCard)" stroke="#D97706" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#B45309" />
+    <text x="22" y="29" class="step-tag" fill="#FDE68A">STAGE 3</text>
+    <text x="15" y="65" class="card-title">Backend Service</text>
+    <text x="15" y="88" class="card-body">⚙️ FastAPI / Go Microservice</text>
+    <text x="15" y="110" class="card-body">• Pre-trade RMS Validation</text>
+    <text x="15" y="130" class="card-body">• User Margin Verification</text>
+    <text x="15" y="150" class="card-body">• Generates Unique Order ID</text>
+    <text x="15" y="170" class="card-body">• Enforces Idempotency Key</text>
+    <text x="15" y="200" class="card-code">Executes Business Logic</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <path d="M 870 235 L 920 235" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="895" y="225" class="connector-text">SQL Write</text>
+
+  <!-- STEP 4: Transactional DB (OLTP) -->
+  <g transform="translate(930, 120)">
+    <rect width="210" height="230" rx="12" fill="url(#tealCard)" stroke="#16A34A" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#15803D" />
+    <text x="22" y="29" class="step-tag" fill="#A7F3D0">STAGE 4</text>
+    <text x="15" y="65" class="card-title">OLTP Database</text>
+    <text x="15" y="88" class="card-body">🗄️ PostgreSQL Master</text>
+    <text x="15" y="110" class="card-body">• ACID Guarantees</text>
+    <text x="15" y="130" class="card-body">• Row inserted in 'orders'</text>
+    <text x="15" y="150" class="card-body">• Balance debited atomically</text>
+    <text x="15" y="170" class="card-body">• Writes to Disk WAL</text>
+    <text x="15" y="200" class="card-code">&lt; 15ms Latency</text>
+  </g>
+
+  <!-- Downward Arrow from OLTP (Stage 4) to Pipeline (Stage 5) -->
+  <path d="M 1035 350 L 1035 440" stroke="#C084FC" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowPurple)" />
+  <text x="1080" y="400" class="connector-text" fill="#C084FC">Async CDC (WAL)</text>
+
+  <!-- ================= ROW 2: DATA PIPELINE TO ANALYTICS ================= -->
+
+  <!-- STEP 5: Data Pipeline & Streaming (CDC) -->
+  <g transform="translate(730, 450)">
+    <rect width="410" height="230" rx="12" fill="url(#purpleCard)" stroke="#9333EA" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#7E22CE" />
+    <text x="22" y="29" class="step-tag" fill="#E9D5FF">STAGE 5</text>
+    <text x="15" y="65" class="card-title">Data Pipeline &amp; Streaming (CDC)</text>
+    <text x="15" y="90" class="card-body">⚡ Debezium CDC + 📨 Apache Kafka Event Bus</text>
+    <text x="15" y="115" class="card-body">• Captures row changes from WAL without locking OLTP tables</text>
+    <text x="15" y="135" class="card-body">• Kafka Topic: <tspan fill="#F472B6">orders.transaction.v1</tspan> (Partitioned)</text>
+    <text x="15" y="155" class="card-body">• Orchestrated via Apache Airflow / dbt pipelines</text>
+    <text x="15" y="175" class="card-body">• Real-time schema validation &amp; deduplication</text>
+    <text x="15" y="200" class="card-code">Zero Production Query Contention</text>
+  </g>
+
+  <!-- Leftward Arrow from Stage 5 to Stage 6 -->
+  <path d="M 730 565 L 640 565" stroke="#C084FC" stroke-width="2" marker-end="url(#arrowPurple)" />
+  <text x="685" y="555" class="connector-text" fill="#C084FC">Micro-Batch</text>
+
+  <!-- STEP 6: Data Warehouse (OLAP) -->
+  <g transform="translate(370, 450)">
+    <rect width="260" height="230" rx="12" fill="url(#purpleCard)" stroke="#9333EA" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#7E22CE" />
+    <text x="22" y="29" class="step-tag" fill="#E9D5FF">STAGE 6</text>
+    <text x="15" y="65" class="card-title">Data Warehouse (OLAP)</text>
+    <text x="15" y="88" class="card-body">🏛️ Snowflake / ClickHouse</text>
+    <text x="15" y="110" class="card-body">• Columnar Storage Engine</text>
+    <text x="15" y="130" class="card-body">• Star Schema Dimensional Model</text>
+    <text x="15" y="150" class="card-body">• <tspan fill="#38BDF8">fact_orders</tspan> &amp; <tspan fill="#38BDF8">dim_users</tspan></text>
+    <text x="15" y="170" class="card-body">• Sub-second scans over 100M+ rows</text>
+    <text x="15" y="200" class="card-code">Aggregations &amp; History</text>
+  </g>
+
+  <!-- Leftward Arrow from Stage 6 to Stage 7 -->
+  <path d="M 370 565 L 300 565" stroke="#34D399" stroke-width="2" marker-end="url(#arrowGreen)" />
+  <text x="335" y="555" class="connector-text" fill="#34D399">SQL Query</text>
+
+  <!-- STEP 7: Analytics Dashboard (BI) -->
+  <g transform="translate(60, 450)">
+    <rect width="230" height="230" rx="12" fill="url(#tealCard)" stroke="#10B981" stroke-width="2" />
+    <rect x="15" y="15" width="60" height="20" class="pill" fill="#047857" />
+    <text x="22" y="29" class="step-tag" fill="#A7F3D0">STAGE 7</text>
+    <text x="15" y="65" class="card-title">Analytics Dashboard</text>
+    <text x="15" y="88" class="card-body">📊 PowerBI / Metabase / Tableau</text>
+    <text x="15" y="110" class="card-body">• Real-time Turnover (ADTO)</text>
+    <text x="15" y="130" class="card-body">• Funnel Conversion &amp; Churn</text>
+    <text x="15" y="150" class="card-body">• User Segment Demographics</text>
+    <text x="15" y="170" class="card-body">• Risk &amp; Margin Exposure</text>
+    <text x="15" y="200" class="card-code">📈 Bluestock Data Analysts</text>
+  </g>
+
+</svg>
